@@ -37,12 +37,12 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  padding: 1.25rem 1.25rem 1.75rem;
+  padding: 1rem 1.25rem 1.5rem;
 }
 
 @media (min-width: 900px) {
   .page {
-    padding: 1.75rem 2.5rem 2rem;
+    padding: 1.25rem 2rem 1.75rem;
   }
 }
 
@@ -50,8 +50,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  max-width: 1200px;
+  gap: 0.85rem;
+  max-width: 1600px;
   margin: 0 auto;
   width: 100%;
 }
@@ -62,8 +62,8 @@ body {
 }
 
 .tour__eyebrow {
-  margin: 0 0 0.25rem;
-  font-size: 0.75rem;
+  margin: 0 0 0.15rem;
+  font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--space-blue);
@@ -72,7 +72,7 @@ body {
 .tour__brand-title {
   margin: 0;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--accent-soft);
@@ -83,15 +83,15 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: center;
   min-height: 0;
 }
 
 @media (min-width: 900px) {
   .tour__stage {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: 2.5rem;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 0.75fr);
+    gap: 2rem;
   }
 }
 
@@ -103,11 +103,43 @@ body {
   animation: fade-in 0.8s ease both;
 }
 
+.tour__image-wrap {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  line-height: 0;
+}
+
 .tour__image {
-  width: 100%;
+  display: block;
+  width: auto;
   height: auto;
-  max-height: min(68vh, 560px);
-  object-fit: contain;
+  max-width: 100%;
+  max-height: min(90vh, 900px);
+}
+
+.tour__marker {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body), "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 3px rgba(196, 92, 74, 0.35);
+  pointer-events: none;
+  animation: marker-pop 0.35s ease both;
 }
 
 .tour__panel {
@@ -115,7 +147,9 @@ body {
   flex-direction: column;
   justify-content: center;
   min-height: 14rem;
-  padding: 1.5rem 1.35rem;
+  max-height: min(90vh, 900px);
+  padding: 1.25rem 1.2rem;
+  overflow-y: auto;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -123,8 +157,8 @@ body {
 
 @media (min-width: 900px) {
   .tour__panel {
-    min-height: 22rem;
-    padding: 2rem 1.75rem;
+    min-height: 0;
+    padding: 1.5rem 1.5rem;
   }
 }
 
@@ -133,37 +167,37 @@ body {
 }
 
 .tour__step-label {
-  margin: 0 0 0.75rem;
-  font-size: 0.8rem;
+  margin: 0 0 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
 .tour__title {
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.65rem;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   font-weight: 500;
   line-height: 1.2;
   color: var(--foreground);
 }
 
 .tour__description {
-  margin: 0 0 1.35rem;
-  font-size: 1.05rem;
-  line-height: 1.65;
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
   color: var(--muted);
 }
 
 .tour__function {
-  padding-top: 1.1rem;
+  padding-top: 0.9rem;
   border-top: 1px solid var(--border);
 }
 
 .tour__function-label {
-  margin: 0 0 0.5rem;
-  font-size: 0.8rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
@@ -172,9 +206,65 @@ body {
 
 .tour__function-text {
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-size: 0.98rem;
+  line-height: 1.6;
   color: var(--foreground);
+}
+
+.tour__detail {
+  margin-top: 1.15rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.tour__detail-label {
+  margin: 0 0 0.55rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--space-blue);
+  font-weight: 600;
+}
+
+.tour__detail-frame {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #0a0e12;
+  aspect-ratio: 3 / 2;
+}
+
+.tour__detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tour__detail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  aspect-ratio: 3 / 2;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  background: rgba(10, 14, 18, 0.65);
+  color: var(--muted);
+  text-align: center;
+  padding: 1rem;
+}
+
+.tour__detail-placeholder-icon {
+  opacity: 0.55;
+  color: var(--space-blue);
+}
+
+.tour__detail-placeholder-text {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .tour__nav {
@@ -182,7 +272,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 1.25rem;
-  padding-top: 0.25rem;
+  padding-top: 0.15rem;
   animation: fade-up 0.7s ease 0.15s both;
 }
 
@@ -219,12 +309,15 @@ body {
 .tour__dots {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 16rem;
 }
 
 .tour__dot {
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.5rem;
+  height: 0.5rem;
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -275,15 +368,31 @@ body {
   }
 }
 
+@keyframes marker-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tour__brand,
   .tour__figure,
   .tour__content,
-  .tour__nav {
+  .tour__nav,
+  .tour__marker {
     animation: none;
   }
 
   .tour__arrow:hover:not(:disabled) {
     transform: none;
+  }
+
+  .tour__marker {
+    transform: translate(-50%, -50%);
   }
 }

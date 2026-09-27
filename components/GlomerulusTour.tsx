@@ -47,20 +47,33 @@ export default function GlomerulusTour() {
 
       <div className="tour__stage">
         <figure className="tour__figure">
-          <Image
-            src="/glomerulo.png"
-            alt="Corte anatómico del glomérulo renal"
-            width={900}
-            height={900}
-            priority
-            className="tour__image"
-          />
+          <div className="tour__image-wrap">
+            <Image
+              src="/glomerulo.png"
+              alt="Corte anatómico del glomérulo renal"
+              width={900}
+              height={900}
+              priority
+              className="tour__image"
+            />
+            {step.marker ? (
+              <span
+                key={`marker-${animKey}`}
+                className="tour__marker"
+                style={{ left: `${step.marker.x}%`, top: `${step.marker.y}%` }}
+                aria-hidden="true"
+              >
+                {step.marker.label}
+              </span>
+            ) : null}
+          </div>
         </figure>
 
         <aside className="tour__panel" aria-live="polite">
           <div key={animKey} className="tour__content">
             <p className="tour__step-label">
               Paso {index + 1} de {tourSteps.length}
+              {step.marker ? ` · Parte ${step.marker.label}` : ""}
             </p>
             <h2 className="tour__title">{step.title}</h2>
             <p className="tour__description">{step.description}</p>
@@ -68,6 +81,41 @@ export default function GlomerulusTour() {
               <h3 className="tour__function-label">¿Para qué sirve?</h3>
               <p className="tour__function-text">{step.function}</p>
             </div>
+
+            {index > 0 ? (
+              <div className="tour__detail">
+                <h3 className="tour__detail-label">Vista detallada</h3>
+                {step.image ? (
+                  <div className="tour__detail-frame">
+                    <Image
+                      src={step.image}
+                      alt={`Detalle de ${step.title}`}
+                      width={480}
+                      height={320}
+                      className="tour__detail-image"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="tour__detail-placeholder"
+                    role="img"
+                    aria-label="Imagen detallada próximamente"
+                  >
+                    <span className="tour__detail-placeholder-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                          fill="currentColor"
+                          d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                        />
+                      </svg>
+                    </span>
+                    <p className="tour__detail-placeholder-text">
+                      Imagen detallada próximamente
+                    </p>
+                  </div>
+                )}
+              </div>
+            ) : null}
           </div>
         </aside>
       </div>
