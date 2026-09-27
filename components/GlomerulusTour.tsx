@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { tourSteps } from "@/data/tour-steps";
-import GlomerulusQuiz from "@/components/GlomerulusQuiz";
+import ChallengeModal from "@/components/ChallengeModal";
 
 export default function GlomerulusTour() {
   const [index, setIndex] = useState(0);
@@ -119,21 +119,6 @@ export default function GlomerulusTour() {
                 )}
               </div>
             ) : null}
-
-            {isLast ? (
-              <div className="tour__quiz-cta">
-                <p className="tour__quiz-text">
-                  Terminaste el recorrido. Responde 3 preguntas de histología.
-                </p>
-                <button
-                  type="button"
-                  className="quiz__button"
-                  onClick={() => setQuizOpen(true)}
-                >
-                  Poner a prueba lo aprendido
-                </button>
-              </div>
-            ) : null}
           </div>
         </aside>
       </div>
@@ -168,23 +153,40 @@ export default function GlomerulusTour() {
           ))}
         </div>
 
-        <button
-          type="button"
-          className="tour__arrow"
-          onClick={() => goTo(index + 1)}
-          disabled={isLast}
-          aria-label="Paso siguiente"
-        >
-          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-            />
-          </svg>
-        </button>
+        {isLast ? (
+          <button
+            type="button"
+            className="quiz__button"
+            onClick={() => setQuizOpen(true)}
+          >
+            Poner a prueba lo aprendido
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="tour__arrow"
+            onClick={() => goTo(index + 1)}
+            aria-label="Paso siguiente"
+          >
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+              />
+            </svg>
+          </button>
+        )}
       </nav>
 
-      {quizOpen ? <GlomerulusQuiz onClose={() => setQuizOpen(false)} /> : null}
+      {quizOpen ? (
+        <ChallengeModal
+          onClose={() => setQuizOpen(false)}
+          onBackToTour={() => {
+            setQuizOpen(false);
+            goTo(0);
+          }}
+        />
+      ) : null}
     </div>
   );
 }

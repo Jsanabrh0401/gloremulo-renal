@@ -7,6 +7,8 @@ export type QuizQuestion = {
   stepId: string;
 };
 
+export const QUESTIONS_PER_ROUND = 3;
+
 export const quizQuestions: QuizQuestion[] = [
   {
     id: "capa-visceral",
