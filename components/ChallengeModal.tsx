@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Fireworks from "@/components/Fireworks";
 import GlomerulusQuiz from "@/components/GlomerulusQuiz";
 import MatchPairs from "@/components/MatchPairs";
 import { QUESTIONS_PER_ROUND } from "@/data/quiz-questions";
@@ -65,6 +66,7 @@ export default function ChallengeModal({ onClose, onBackToTour }: Props) {
 
   return (
     <div className="quiz__backdrop" onClick={onClose}>
+      {phase === "result" && total === MAX_SCORE ? <Fireworks key={attempt} /> : null}
       <div
         ref={dialogRef}
         className="quiz"
