@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QUESTIONS_PER_ROUND, quizQuestions } from "@/data/quiz-questions";
 import { pickRandom, shuffle } from "@/lib/random";
 
@@ -11,6 +11,8 @@ type RoundQuestion = {
   correctIndex: number;
   explanation: string;
 };
+
+const LEAVE_DURATION_MS = 220;
 
 let previousRoundIds: string[] = [];
 
@@ -36,6 +38,8 @@ export default function GlomerulusQuiz({ onComplete }: Props) {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
+  const [leaving, setLeaving] = useState(false);
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const question = round[current];
   const answered = selected !== null;
@@ -45,6 +49,12 @@ export default function GlomerulusQuiz({ onComplete }: Props) {
     previousRoundIds = round.map((q) => q.id);
   }, [round]);
 
+  useEffect(() => {
+    return () => {
+      if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    };
+  }, []);
+
   function choose(optionIndex: number) {
     if (answered) return;
     setSelected(optionIndex);
@@ -52,12 +62,17 @@ export default function GlomerulusQuiz({ onComplete }: Props) {
   }
 
   function next() {
-    if (isLastQuestion) {
-      onComplete(score);
-      return;
-    }
-    setSelected(null);
-    setCurrent((c) => c + 1);
+    if (leaving) return;
+    setLeaving(true);
+    leaveTimer.current = setTimeout(() => {
+      if (isLastQuestion) {
+        onComplete(score);
+        return;
+      }
+      setSelected(null);
+      setCurrent((c) => c + 1);
+      setLeaving(false);
+    }, LEAVE_DURATION_MS);
   }
 
   function optionClass(i: number): string {
@@ -68,7 +83,10 @@ export default function GlomerulusQuiz({ onComplete }: Props) {
   }
 
   return (
-    <div key={question.id} className="quiz__body">
+    <div
+      key={question.id}
+      className={`quiz__body${leaving ? " quiz__body--leaving" : ""}`}
+    >
       <p className="quiz__progress">
         Pregunta {current + 1} de {round.length}
       </p>

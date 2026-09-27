@@ -74,10 +74,6 @@ export default function GlomerulusTour() {
 
         <aside className="tour__panel" aria-live="polite">
           <div key={animKey} className="tour__content">
-            <p className="tour__step-label">
-              Paso {index + 1} de {tourSteps.length}
-              {step.marker ? ` · Parte ${step.marker.label}` : ""}
-            </p>
             <h2 className="tour__title">{step.title}</h2>
             <p className="tour__description">{step.description}</p>
             <div className="tour__function">

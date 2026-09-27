@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { PAIRS_PER_ROUND, matchPairs, type MatchPair } from "@/data/match-pairs";
 import { pickRandom, shuffle } from "@/lib/random";
 
@@ -9,11 +9,17 @@ type Round = {
   descriptions: MatchPair[];
 };
 
+const LEAVE_DURATION_MS = 220;
+
 let previousRoundIds: string[] = [];
 
 function buildRound(excludeIds: string[]): Round {
   const terms = pickRandom(matchPairs, PAIRS_PER_ROUND, excludeIds);
-  return { terms, descriptions: shuffle(terms) };
+  let descriptions = shuffle(terms);
+  while (descriptions.every((d, i) => d.id === terms[i].id)) {
+    descriptions = shuffle(terms);
+  }
+  return { terms, descriptions };
 }
 
 type Props = {
@@ -27,6 +33,8 @@ export default function MatchPairs({ onComplete }: Props) {
   const [selectedTerm, setSelectedTerm] = useState<string | null>(null);
   const [selectedDescription, setSelectedDescription] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const allPaired = Object.keys(pairs).length === round.terms.length;
   const score = round.terms.filter((t) => pairs[t.id] === t.id).length;
@@ -35,6 +43,18 @@ export default function MatchPairs({ onComplete }: Props) {
   useEffect(() => {
     previousRoundIds = round.terms.map((t) => t.id);
   }, [round]);
+
+  useEffect(() => {
+    return () => {
+      if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    };
+  }, []);
+
+  function finish() {
+    if (leaving) return;
+    setLeaving(true);
+    leaveTimer.current = setTimeout(() => onComplete(score), LEAVE_DURATION_MS);
+  }
 
   function termFor(descriptionId: string): string | null {
     return Object.keys(pairs).find((termId) => pairs[termId] === descriptionId) ?? null;
@@ -86,7 +106,7 @@ export default function MatchPairs({ onComplete }: Props) {
   }
 
   function termClass(termId: string): string {
-    const classes = ["match__item"];
+    const classes = ["match__item", "match__item--term"];
     if (checked) {
       classes.push(pairs[termId] === termId ? "match__item--correct" : "match__item--wrong");
     } else if (pairs[termId]) {
@@ -111,35 +131,32 @@ export default function MatchPairs({ onComplete }: Props) {
   }
 
   return (
-    <div className="quiz__body">
+    <div className={`quiz__body${leaving ? " quiz__body--leaving" : ""}`}>
       <p className="quiz__progress">Une cada estructura con su descripción</p>
       <p className="match__hint">
         Toca una estructura y luego su descripción. Para deshacer una pareja, vuelve a tocarla.
       </p>
 
       <div className="match__grid">
-        <div className="match__column" role="group" aria-label="Estructuras">
-          {round.terms.map((term, i) => (
-            <button
-              key={term.id}
-              type="button"
-              className={termClass(term.id)}
-              onClick={() => clickTerm(term.id)}
-              disabled={checked}
-              aria-pressed={selectedTerm === term.id}
-            >
-              <span className="match__badge">{i + 1}</span>
-              <span>{term.term}</span>
-            </button>
-          ))}
-        </div>
+        <p className="match__label match__label--terms">Estructura</p>
+        <p className="match__label match__label--descriptions">Descripción</p>
 
-        <div className="match__column" role="group" aria-label="Descripciones">
-          {round.descriptions.map((item) => {
-            const owner = termFor(item.id);
-            return (
+        {round.terms.map((term, i) => {
+          const item = round.descriptions[i];
+          const owner = termFor(item.id);
+          return (
+            <Fragment key={term.id}>
               <button
-                key={item.id}
+                type="button"
+                className={termClass(term.id)}
+                onClick={() => clickTerm(term.id)}
+                disabled={checked}
+                aria-pressed={selectedTerm === term.id}
+              >
+                <span className="match__badge">{i + 1}</span>
+                <span>{term.term}</span>
+              </button>
+              <button
                 type="button"
                 className={descriptionClass(item.id)}
                 onClick={() => clickDescription(item.id)}
@@ -151,9 +168,9 @@ export default function MatchPairs({ onComplete }: Props) {
                 </span>
                 <span>{item.description}</span>
               </button>
-            );
-          })}
-        </div>
+            </Fragment>
+          );
+        })}
       </div>
 
       {checked ? (
@@ -179,7 +196,7 @@ export default function MatchPairs({ onComplete }: Props) {
 
       <div className="quiz__actions">
         {checked ? (
-          <button type="button" className="quiz__button" onClick={() => onComplete(score)}>
+          <button type="button" className="quiz__button" onClick={finish}>
             Ver resultado final
           </button>
         ) : (

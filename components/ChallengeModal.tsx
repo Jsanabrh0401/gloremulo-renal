@@ -11,7 +11,7 @@ type Phase = "quiz" | "match" | "result";
 const MAX_SCORE = QUESTIONS_PER_ROUND + PAIRS_PER_ROUND;
 
 const phaseHeader: Record<Phase, { eyebrow: string; title: string }> = {
-  quiz: { eyebrow: "Actividad 1 de 2", title: "Quiz de histología" },
+  quiz: { eyebrow: "Actividad 1 de 2", title: "Quiz" },
   match: { eyebrow: "Actividad 2 de 2", title: "Une las parejas" },
   result: { eyebrow: "Poner a prueba lo aprendido", title: "Resultado final" },
 };
@@ -112,7 +112,7 @@ export default function ChallengeModal({ onClose, onBackToTour }: Props) {
             <p className="quiz__message">{resultMessage(total)}</p>
             <ul className="result__breakdown">
               <li>
-                <span>Quiz de histología</span>
+                <span>Quiz</span>
                 <strong>
                   {quizScore} / {QUESTIONS_PER_ROUND}
                 </strong>
