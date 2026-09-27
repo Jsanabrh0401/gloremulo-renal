@@ -3,10 +3,12 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { tourSteps } from "@/data/tour-steps";
+import GlomerulusQuiz from "@/components/GlomerulusQuiz";
 
 export default function GlomerulusTour() {
   const [index, setIndex] = useState(0);
   const [animKey, setAnimKey] = useState(0);
+  const [quizOpen, setQuizOpen] = useState(false);
   const step = tourSteps[index];
   const isFirst = index === 0;
   const isLast = index === tourSteps.length - 1;
@@ -18,6 +20,7 @@ export default function GlomerulusTour() {
   }
 
   useEffect(() => {
+    if (quizOpen) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === "ArrowRight") {
         setIndex((i) => {
@@ -36,7 +39,7 @@ export default function GlomerulusTour() {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [quizOpen]);
 
   return (
     <div className="tour">
@@ -116,6 +119,21 @@ export default function GlomerulusTour() {
                 )}
               </div>
             ) : null}
+
+            {isLast ? (
+              <div className="tour__quiz-cta">
+                <p className="tour__quiz-text">
+                  Terminaste el recorrido. Responde 3 preguntas de histología.
+                </p>
+                <button
+                  type="button"
+                  className="quiz__button"
+                  onClick={() => setQuizOpen(true)}
+                >
+                  Poner a prueba lo aprendido
+                </button>
+              </div>
+            ) : null}
           </div>
         </aside>
       </div>
@@ -165,6 +183,8 @@ export default function GlomerulusTour() {
           </svg>
         </button>
       </nav>
+
+      {quizOpen ? <GlomerulusQuiz onClose={() => setQuizOpen(false)} /> : null}
     </div>
   );
 }
