@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { tourSteps } from "@/data/tour-steps";
 import ChallengeModal from "@/components/ChallengeModal";
 
@@ -9,6 +9,7 @@ export default function GlomerulusTour() {
   const [index, setIndex] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const [quizOpen, setQuizOpen] = useState(false);
+  const panelRef = useRef<HTMLElement>(null);
   const step = tourSteps[index];
   const isFirst = index === 0;
   const isLast = index === tourSteps.length - 1;
@@ -41,10 +42,14 @@ export default function GlomerulusTour() {
     return () => window.removeEventListener("keydown", onKey);
   }, [quizOpen]);
 
+  useEffect(() => {
+    panelRef.current?.scrollTo({ top: 0 });
+  }, [index]);
+
   return (
     <div className="tour">
       <header className="tour__brand">
-        <p className="tour__eyebrow">Anatomía renal</p>
+        <p className="tour__eyebrow">Histología renal</p>
         <h1 className="tour__brand-title">Glomérulo renal</h1>
       </header>
 
@@ -72,7 +77,7 @@ export default function GlomerulusTour() {
           </div>
         </figure>
 
-        <aside className="tour__panel" aria-live="polite">
+        <aside ref={panelRef} className="tour__panel" aria-live="polite">
           <div key={animKey} className="tour__content">
             <h2 className="tour__title">{step.title}</h2>
             <p className="tour__description">{step.description}</p>
