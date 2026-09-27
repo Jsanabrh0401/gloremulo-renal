@@ -125,19 +125,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0;
-  border: 2px solid #fff;
+  border: 1.5px solid #fff;
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
   font-family: var(--font-body), "Segoe UI", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 700;
   line-height: 1;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 3px rgba(196, 92, 74, 0.35);
+  box-shadow: 0 0 0 2px rgba(196, 92, 74, 0.35);
   pointer-events: none;
   animation: marker-pop 0.35s ease both;
 }

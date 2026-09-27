@@ -23,22 +23,22 @@ export const tourSteps: TourStep[] = [
   },
   {
     id: "tubulo-contorneado",
-    title: "Tubulo contorneado distal",
+    title: "Túbulo contorneado distal",
     description:
-      "Es la unidad de filtración del riñón: un ovillo de capilares envuelto por la cápsula de Bowman. Forma el corpúsculo renal, el primer eslabón de cada nefrona.",
+      "Porción de la nefrona situada después del asa de Henle y antes del túbulo colector. Pasa junto al glomérulo, y en ese punto sus células forman la mácula densa, parte del aparato yuxtaglomerular.",
     function:
-      "Filtra la sangre para formar la orina primaria (filtrado glomerular), reteniendo células y la mayoría de las proteínas.",
-    image: null,
+      "Hace el ajuste fino del filtrado: reabsorbe sodio, cloro y calcio y los devuelve a la sangre, lo que ayuda a mantener el equilibrio de electrolitos y el volumen de líquidos. En la mácula densa detecta el NaCl y ayuda a regular la filtración y la liberación de renina.",
+    image: "/tubulo_contorneado.jpg",
     marker: { x: 49, y: 5, label: 1 },
   },
   {
     id: "macula-densa",
     title: "Mácula densa",
     description:
-      "Grupo de células especializadas del túbulo distal (tono amarillo-verdoso) situadas en el polo vascular, junto a las arteriolas.",
+      "Grupo de células especializadas del túbulo contorneado distal, ubicado muy cerca del glomérulo. Forma parte del aparato yuxtaglomerular.",
     function:
-      "Detectan la concentración de NaCl y ayudan a regular la tasa de filtración glomerular (TFG).",
-    image: null,
+      "Detecta cambios de sodio y cloro (NaCl) en el líquido tubular. Si el NaCl baja, avisa a las células yuxtaglomerulares para que liberen renina, lo que ayuda a subir la presión arterial y a conservar sodio y agua.",
+    image: "/macula_densa.jpg",
     marker: { x: 47, y: 16, label: 2 },
   },
   {
@@ -63,112 +63,102 @@ export const tourSteps: TourStep[] = [
   },
   {
     id: "celulas-yuxtaglomerulares",
-    title: "Celulas yuxtaglomerulares",
+    title: "Células yuxtaglomerulares",
     description:
-      "Es el vaso que sale del glomérulo por el polo vascular con la sangre ya filtrada. Su pared muscular puede contraerse o dilatarse según señales hormonales y nerviosas.",
+      "Células especializadas en la pared de la arteriola aferente, cerca del glomérulo. Forman parte del aparato yuxtaglomerular.",
     function:
-      "Al contraerse actúa como cuello de botella: sube la presión en los capilares y la TFG. Luego se ramifica en capilares peritubulares, clave para la reabsorción y secreción en los túbulos.",
-    image: "/arteriola_eferente.jpg",
+      "Detectan cuando baja la presión sanguínea en la arteriola y liberan renina. Esta hormona inicia un proceso que sube la presión arterial y conserva sodio y agua, regulando así el equilibrio de líquidos del organismo.",
+    image: "/celulas_yuxtaglomerulares.jpg",
     marker: { x: 47, y: 22, label: 5 },
   },
   {
     id: "mesangio-extraglomerular",
     title: "Mesangio extraglomerular",
     description:
-      "Células y matriz (azul-verdosas) en el triángulo entre las arteriolas y la mácula densa, fuera del ovillo capilar.",
+      "Grupo de células ubicado fuera del glomérulo, entre la arteriola aferente, la arteriola eferente y la mácula densa. Forma parte del aparato yuxtaglomerular.",
     function:
-      "Brindan soporte estructural y comunican la mácula densa con las células yuxtaglomerulares.",
-    image: null,
+      "Recibe y transmite señales entre la mácula densa y las arteriolas para coordinar el aparato yuxtaglomerular. Así ayuda a regular el flujo sanguíneo renal, la filtración glomerular y la liberación de renina.",
+    image: "/mesangio_extraglomerular.jpg",
     marker: { x: 49, y: 24, label: 6 },
   },
   {
     id: "capsula-bowman",
     title: "Cápsula de Bowman",
     description:
-      "Estructura en forma de copa (pared exterior beige) que rodea el ovillo capilar y forma el límite del corpúsculo renal.",
+      "Estructura en forma de copa que rodea al glomérulo. Tiene una capa externa (parietal) y una interna (visceral) formada por podocitos; entre ambas queda el espacio de Bowman.",
     function:
-      "Recibe el filtrado que sale de los capilares y lo dirige hacia el polo urinario.",
-    image: null,
+      "Recoge el filtrado glomerular y da inicio a la formación de la orina. El agua y las moléculas pequeñas cruzan los capilares hacia el espacio de Bowman, mientras las células y la mayoría de las proteínas se quedan en la sangre. Luego el filtrado pasa al túbulo contorneado proximal.",
+    image: "/capsula.jpg",
     marker: { x: 65, y: 30, label: 7 },
   },
   {
     id: "espacio-bowman",
     title: "Espacio de Bowman",
     description:
-      "Cavidad de tono azul claro entre la cápsula y el ovillo capilar, también llamada espacio urinario.",
+      "Espacio entre las dos capas de la cápsula de Bowman que rodea al glomérulo. Allí se acumula el líquido filtrado desde la sangre.",
     function:
-      "Es donde se acumula el filtrado glomerular antes de pasar al túbulo proximal.",
-    image: null,
+      "Recibe el agua y las sustancias pequeñas que atraviesan los capilares y las conduce al túbulo contorneado proximal. Es el primer lugar donde se recoge el líquido que dará origen a la orina.",
+    image: "/espacio.jpg",
     marker: { x: 65, y: 47, label: 8 },
   },
   {
-    id: "capilar-glomerular",
-    title: "Capilar glomerular",
+    id: "membrana-basal",
+    title: "Membrana basal glomerular",
     description:
-      "Cavidad de tono azul claro entre la cápsula y el ovillo capilar, también llamada espacio urinario.",
+      "Capa especializada situada entre los capilares glomerulares y los podocitos. Forma parte de la barrera de filtración glomerular.",
     function:
-      "Es donde se acumula el filtrado glomerular antes de pasar al túbulo proximal.",
-    image: null,
-    marker: { x: 63, y: 54, label: 9 },
+      "Actúa como filtro selectivo: deja pasar agua y moléculas pequeñas, pero frena las grandes, sobre todo las proteínas, gracias a su estructura y su carga eléctrica negativa. Así evita que se pierdan proteínas en la orina y además da soporte a los capilares.",
+    image: "/membrana_basal.jpg",
+    marker: { x: 62, y: 59, label: 9 },
   },
   {
-    id: "capilares",
+    id: "capilares-glomerulares",
     title: "Capilares glomerulares",
     description:
-      "Ovillo de capilares fenestrados en el centro del glomérulo. En el corte se ven eritrocitos dentro de su luz.",
+      "Red de pequeños vasos sanguíneos dentro del glomérulo, rodeados por podocitos. Forman parte de la barrera de filtración glomerular.",
     function:
-      "Superficie principal de filtración: el plasma atraviesa su pared hacia el espacio de Bowman.",
-    image: null,
+      "La sangre llega por la arteriola aferente y circula por ellos. La presión empuja el agua y las moléculas pequeñas hacia el espacio de Bowman, mientras las células y la mayoría de las proteínas se quedan en la sangre. Así producen el filtrado glomerular que luego se convertirá en orina.",
+    image: "/capilares_glomerulares.jpg",
     marker: { x: 62, y: 59, label: 10 },
   },
   {
     id: "podocitos",
     title: "Podocitos",
     description:
-      "Células epiteliales crema con prolongaciones (pedicelos) que abrazan los capilares y forman parte de la barrera de filtración.",
+      "Células especializadas que recubren por fuera los capilares glomerulares. Forman la capa interna de la cápsula de Bowman y tienen prolongaciones llamadas pedicelos.",
     function:
-      "Dejan pasar agua y solutos pequeños e impiden el paso de proteínas grandes y células.",
-    image: null,
+      "Sus pedicelos se entrelazan y dejan hendiduras de filtración por donde pasan el agua y las moléculas pequeñas, mientras frenan las proteínas. Así forman y mantienen la barrera de filtración y evitan la pérdida de proteínas en la orina.",
+    image: "/podocitos.jpg",
     marker: { x: 63, y: 42, label: 11 },
   },
   {
     id: "mesangio-intraglomerular",
     title: "Mesangio intraglomerular",
     description:
-      "Red de células y matriz (tono violáceo) en el centro del ovillo, entre las asas capilares.",
+      "Conjunto de células y matriz de soporte ubicado dentro del glomérulo, entre los capilares glomerulares. Forma parte de la estructura que los sostiene.",
     function:
-      "Sostienen la estructura, fagocitan desechos y ayudan a regular el flujo sanguíneo local.",
-    image: null,
+      "Da soporte a los capilares y ayuda a regular la filtración: sus células pueden contraerse y cambiar el área disponible para filtrar. También fagocitan residuos atrapados, manteniendo limpio el glomérulo.",
+    image: "/mesangio_intraglomerular.jpg",
     marker: { x: 48, y: 45, label: 12 },
   },
   {
-    id: "membrana-basal",
-    title: "Membrana basal glomerular",
-    description:
-      "Red de células y matriz (tono violáceo) en el centro del ovillo, entre las asas capilares.",
-    function:
-      "Sostienen la estructura, fagocitan desechos y ayudan a regular el flujo sanguíneo local.",
-    image: null,
-    marker: { x: 56, y: 70, label: 13 },
-  },
-  {
     id: "celula-epitelial",
-    title: "Celula epitelial del túbulo proximal",
+    title: "Célula epitelial del túbulo proximal",
     description:
-      "Red de células y matriz (tono violáceo) en el centro del ovillo, entre las asas capilares.",
+      "Célula que reviste el túbulo contorneado proximal, justo después de la cápsula de Bowman. Su superficie tiene muchas microvellosidades que forman el borde en cepillo.",
     function:
-      "Sostienen la estructura, fagocitan desechos y ayudan a regular el flujo sanguíneo local.",
-    image: null,
-    marker: { x: 52.5, y: 90, label: 14 },
+      "Reabsorbe gran parte del agua, el sodio, la glucosa, los aminoácidos y otras sustancias útiles del filtrado y las devuelve a la sangre. También secreta algunos desechos hacia el túbulo, lo que ayuda al equilibrio de agua y electrolitos.",
+    image: "/celular_epitelial.jpg",
+    marker: { x: 52.5, y: 90, label: 13 },
   },
   {
     id: "polo-urinario",
     title: "Polo urinario",
     description:
-      "En la parte inferior, la cápsula se abre hacia el inicio del túbulo contorneado proximal, revestido de células cúbicas.",
+      "Zona del corpúsculo renal donde termina la cápsula de Bowman y comienza el túbulo contorneado proximal. Está en el lado opuesto al polo vascular.",
     function:
-      "Salida del filtrado hacia el resto de la nefrona, donde se reabsorbe y se concentra la orina definitiva.",
-    image: null,
-    marker: { x: 49.5, y: 90, label: 15 },
+      "Conecta el corpúsculo renal con el túbulo proximal: el filtrado acumulado en el espacio de Bowman sale por aquí y continúa su recorrido por la nefrona.",
+    image: "/polo.jpg",
+    marker: { x: 49.5, y: 90, label: 14 },
   },
 ];
